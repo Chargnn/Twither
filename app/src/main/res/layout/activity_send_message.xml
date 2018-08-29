@@ -15,7 +15,7 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:background="@color/colorTextBox"
+        android:background="@color/hr"
         android:gravity="top|left"
         android:hint="Entrer votre texte..."
         android:inputType="textMultiLine"
@@ -33,6 +33,7 @@
         android:layout_marginTop="48dp"
         android:background="@drawable/rounded_button"
         android:text="Envoyer"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText7" />

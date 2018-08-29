@@ -9,7 +9,7 @@ public class Twit {
     public String message;
     public Date date;
 
-    private Random rand = new Random(1000);
+    private Random rand = new Random();
 
     public Twit(String author, String message){
         this.author = author;

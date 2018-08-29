@@ -53,6 +53,15 @@ public class HomeListViewAdapter extends ArrayAdapter<Twit> {
         long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 
-        return "Il y a " + minutes + " min";
+        if(seconds < 60)
+            return "Il y a " + seconds + " sec(s)";
+        else if(minutes < 60)
+            return "Il y a " + minutes + " min(s)";
+        else if(hours < 24)
+            return "Il y a " + hours + " hr(s)";
+        else if(days < 365)
+            return "Il y a " + days + " jour(s)";
+        else
+            return "Il y a " + years + " an(s)";
     }
 }
