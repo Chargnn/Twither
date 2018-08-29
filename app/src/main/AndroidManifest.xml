@@ -21,8 +21,13 @@
         <activity
             android:name=".SignupActivity"
             android:parentActivityName=".LoginActivity"
-            android:theme="@style/Twither_Theme"></activity>
-        <activity android:name=".HomeActivity"></activity>
+            android:theme="@style/Twither_Theme" />
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".SendMessageActivity"
+            android:theme="@style/Twither_Theme"
+            android:parentActivityName=".HomeActivity"
+            android:label="@string/title_activity_send_message"></activity>
     </application>
 
 </manifest>

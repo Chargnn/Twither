@@ -1,15 +1,18 @@
 package coulombe.twither;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -20,6 +23,14 @@ public class HomeActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Accueil");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
+
+        FloatingActionButton sendMessage = findViewById(R.id.floatingActionButton);
+        sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSendMessageActivity();
+            }
+        });
     }
 
     @Override
@@ -70,5 +81,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         return true;
+    }
+
+    private void openSendMessageActivity(){
+        Intent i = new Intent(this, SendMessageActivity.class);
+        startActivity(i);
     }
 }

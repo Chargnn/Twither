@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Twither</string>
+    <string name="title_activity_send_message">SendMessageActivity</string>
 </resources>
