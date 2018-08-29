@@ -30,11 +30,11 @@ public class SignupActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         password = findViewById(R.id.editText5);
-        password.addTextChangedListener(new TextWatcher() {
 
+        password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                progressBar.setProgress(0);
             }
 
             @Override

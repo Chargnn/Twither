@@ -13,8 +13,18 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import coulombe.twither.Home.HomeListViewAdapter;
+import coulombe.twither.Home.Twit;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private List<Twit> twits = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +41,20 @@ public class HomeActivity extends AppCompatActivity {
                 openSendMessageActivity();
             }
         });
+
+        /////////////////////////////// TEMPORARY
+        twits.add(new Twit("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
+        twits.add(new Twit("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
+        twits.add(new Twit("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
+
+
+
+        ListView twit_list_view = findViewById(R.id.home_list_view);
+        ArrayAdapter<Twit> adapter = new HomeListViewAdapter(this);
+        adapter.addAll(twits);
+        twit_list_view.setAdapter(adapter);
+
+        ///////////////////////////////
     }
 
     @Override
