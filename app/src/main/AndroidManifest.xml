@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Twither_Theme">
-
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Twither_Theme">
@@ -19,12 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignupActivity"
-            android:theme="@style/Twither_Theme"
-            android:parentActivityName=".LoginActivity">
-        </activity>
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/Twither_Theme"></activity>
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
