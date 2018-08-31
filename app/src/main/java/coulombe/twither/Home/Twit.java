@@ -11,10 +11,10 @@ public class Twit {
 
     private Random rand = new Random();
 
-    public Twit(String author, String message){
+    public Twit(String author, String message) {
         this.author = author;
         this.message = message;
         date = new Date();
-        date.setSeconds(rand.nextInt(10000 - 1) + 1);
+        date.setSeconds(rand.nextInt(100000 - 1) + 1);
     }
 }

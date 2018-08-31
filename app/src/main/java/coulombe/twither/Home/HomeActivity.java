@@ -1,4 +1,4 @@
-package coulombe.twither;
+package coulombe.twither.Home;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +19,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import coulombe.twither.Home.HomeListViewAdapter;
-import coulombe.twither.Home.Twit;
+import coulombe.twither.R;
 
 public class HomeActivity extends AppCompatActivity {
 

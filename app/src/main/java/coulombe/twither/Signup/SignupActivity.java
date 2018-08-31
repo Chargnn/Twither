@@ -1,4 +1,4 @@
-package coulombe.twither;
+package coulombe.twither.Signup;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -6,12 +6,11 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import java.util.regex.Pattern;
+import coulombe.twither.R;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                onPasswordTextChanged();
+                updateProgressBar();
             }
 
             @Override
@@ -49,7 +48,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void onPasswordTextChanged(){
+    private void updateProgressBar(){
         progressBar.setProgress(0);
         for(int i = 0; i < 4; i++)
             passwordVerification[i] = false;
@@ -95,6 +94,11 @@ public class SignupActivity extends AppCompatActivity {
             case 100:
             {
                 progressDrawable.setColorFilter(Color.rgb(123, 255, 84), android.graphics.PorterDuff.Mode.SRC_IN);
+                break;
+            }
+            default:{
+                progressDrawable.setColorFilter(Color.LTGRAY, android.graphics.PorterDuff.Mode.SRC_IN);
+
                 break;
             }
         }

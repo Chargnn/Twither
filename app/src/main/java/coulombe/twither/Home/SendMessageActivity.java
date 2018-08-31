@@ -1,4 +1,4 @@
-package coulombe.twither;
+package coulombe.twither.Home;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,6 +8,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import coulombe.twither.Global.TwitConstant;
+import coulombe.twither.R;
 
 public class SendMessageActivity extends AppCompatActivity {
 
@@ -28,12 +31,12 @@ public class SendMessageActivity extends AppCompatActivity {
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                remainingCharacter.setText("Espaces restants: 140");
+                remainingCharacter.setText("Espaces restants: " + TwitConstant.MAX_MESSAGE_LENGTH);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                remainingCharacter.setText("Espaces restants: " + (140 - s.length()));
+                remainingCharacter.setText("Espaces restants: " + (TwitConstant.MAX_MESSAGE_LENGTH - s.length()));
             }
 
             @Override
