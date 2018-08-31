@@ -13,6 +13,7 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coulombe.twither.Global.TwitMessage;
+import coulombe.twither.Home.TwitMessage.SeeMessageActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
 
@@ -59,6 +61,13 @@ public class HomeActivity extends AppCompatActivity {
         twit_list_view.setAdapter(adapter);
 
         ///////////////////////////////
+
+        twit_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openSeeMessageActivity();
+            }
+        });
     }
 
     @Override
@@ -121,6 +130,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void openProfileActivity(){
         Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
+    }
+
+    private void openSeeMessageActivity(){
+        Intent i = new Intent(this, SeeMessageActivity.class);
         startActivity(i);
     }
 }
