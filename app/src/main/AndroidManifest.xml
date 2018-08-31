@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="coulombe.twither">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,11 +27,13 @@
         <activity android:name=".Home.HomeActivity" />
         <activity
             android:name=".Home.SendMessageActivity"
-            android:theme="@style/Twither_Theme"
+            android:label="@string/title_activity_send_message"
             android:parentActivityName=".Home.HomeActivity"
-            android:label="@string/title_activity_send_message"></activity>
+            android:theme="@style/Twither_Theme" />
+        <activity android:name=".Profile.ProfileActivity"
+            android:parentActivityName=".Home.HomeActivity"
+            android:theme="@style/Twither_Theme"
+            />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

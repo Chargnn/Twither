@@ -1,9 +1,9 @@
-package coulombe.twither.Home;
+package coulombe.twither.Global;
 
 import java.util.Date;
 import java.util.Random;
 
-public class Twit {
+public class TwitMessage {
 
     public String author;
     public String message;
@@ -11,7 +11,7 @@ public class Twit {
 
     private Random rand = new Random();
 
-    public Twit(String author, String message) {
+    public TwitMessage(String author, String message) {
         this.author = author;
         this.message = message;
         date = new Date();
