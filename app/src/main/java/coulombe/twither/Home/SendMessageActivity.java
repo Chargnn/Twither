@@ -9,7 +9,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import coulombe.twither.Global.TwitConstant;
+import coulombe.twither.Global.TwitConstants;
 import coulombe.twither.R;
 
 public class SendMessageActivity extends AppCompatActivity {
@@ -31,12 +31,12 @@ public class SendMessageActivity extends AppCompatActivity {
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                remainingCharacter.setText("Espaces restants: " + TwitConstant.MAX_MESSAGE_LENGTH);
+                remainingCharacter.setText("Espaces restants: " + TwitConstants.MAX_MESSAGE_LENGTH);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                remainingCharacter.setText("Espaces restants: " + (TwitConstant.MAX_MESSAGE_LENGTH - s.length()));
+                remainingCharacter.setText("Espaces restants: " + (TwitConstants.MAX_MESSAGE_LENGTH - s.length()));
             }
 
             @Override
