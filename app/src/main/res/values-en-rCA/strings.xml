@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Quit">Quit</string>
+    <string name="Disconnect">Disconnect</string>
+    <string name="RemainingSpaces">Remaining spaces:</string>
+    <string name="WriteMessage">Write a message</string>
+    <string name="MessageOf">Twit of</string>
+    <string name="Login">Login</string>
+    <string name="ProfileOf">Profile of</string>
+    <string name="Signup">Signup</string>
+    <string name="Days">Day(s)</string>
+    <string name="Years">Yr(s)</string>
+</resources>

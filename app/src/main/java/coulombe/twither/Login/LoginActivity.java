@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().setTitle("Identification Twither");
+        getSupportActionBar().setTitle(getString(R.string.Login) + " " + getString(R.string.app_name));
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
         TextView signup = findViewById(R.id.textView2);

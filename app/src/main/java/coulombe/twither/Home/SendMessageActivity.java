@@ -22,7 +22,7 @@ public class SendMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message);
 
-        getSupportActionBar().setTitle("Écrire un message");
+        getSupportActionBar().setTitle(R.string.WriteMessage);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
@@ -31,12 +31,12 @@ public class SendMessageActivity extends AppCompatActivity {
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                remainingCharacter.setText("Espaces restants: " + TwitConstants.MAX_MESSAGE_LENGTH);
+                remainingCharacter.setText(getString(R.string.RemainingSpaces) + " " + TwitConstants.MAX_MESSAGE_LENGTH);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                remainingCharacter.setText("Espaces restants: " + (TwitConstants.MAX_MESSAGE_LENGTH - s.length()));
+                remainingCharacter.setText(getString(R.string.RemainingSpaces) + " " + (TwitConstants.MAX_MESSAGE_LENGTH - s.length()));
             }
 
             @Override

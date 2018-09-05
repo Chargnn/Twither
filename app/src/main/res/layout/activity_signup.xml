@@ -24,11 +24,11 @@
         android:id="@+id/editText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="Courriel"
-        android:maxLength="50"
         android:inputType="textEmailAddress"
+        android:maxLength="50"
         app:layout_constraintStart_toStartOf="@+id/editText3"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
@@ -36,11 +36,11 @@
         android:id="@+id/editText5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
-        android:maxLength="20"
         android:hint="Mot de passe"
         android:inputType="textPassword"
+        android:maxLength="20"
         app:layout_constraintStart_toStartOf="@+id/editText4"
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
@@ -48,11 +48,11 @@
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="Confirmation"
-        android:maxLength="20"
         android:inputType="textPassword"
+        android:maxLength="20"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
@@ -60,7 +60,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/rounded_button"
         android:text="Inscription"
         android:textColor="@android:color/background_light"

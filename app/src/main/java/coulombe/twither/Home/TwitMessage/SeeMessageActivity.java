@@ -14,7 +14,7 @@ public class SeeMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_message);
 
-        getSupportActionBar().setTitle("Twit de [pseudo]");
+        getSupportActionBar().setTitle(this.getString(R.string.MessageOf) + " [pseudo]");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
     }

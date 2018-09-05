@@ -61,15 +61,15 @@ public class HomeListViewAdapter extends ArrayAdapter<TwitMessage> {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
 
         if(seconds < 60)
-            return "Il y a " + seconds + " sec(s)";
+            return seconds + " sec(s)";
         else if(minutes < 60)
-            return "Il y a " + minutes + " min(s)";
+            return minutes + " min(s)";
         else if(hours < 24)
-            return "Il y a " + hours + " hr(s)";
+            return hours + " hr(s)";
         else if(days < 365)
-            return "Il y a " + days + " jour(s)";
+            return days + " " + getContext().getString(R.string.Days);
         else
-            return "Il y a " + years + " an(s)";
+            return years + " " + getContext().getString(R.string.Years);
     }
 
     private void openProfileActivity(){

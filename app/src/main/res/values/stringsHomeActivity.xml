@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">Twither</string>
+    <string name="title_activity_send_message">SendMessageActivity</string>
+    <string name="Home">Accueil</string>
+    <string name="Profile">Profil</string>
+    <string name="About">À propos</string>
+</resources>

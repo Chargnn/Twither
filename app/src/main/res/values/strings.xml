@@ -1,4 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Twither</string>
-    <string name="title_activity_send_message">SendMessageActivity</string>
+    <string name="Quit">Quitter</string>
+    <string name="Disconnect">Déconnexion</string>
+    <string name="RemainingSpaces">Espaces restants:</string>
+    <string name="WriteMessage">Écrire un message</string>
+    <string name="MessageOf">Twit de</string>
+    <string name="Login">Identification</string>
+    <string name="ProfileOf">Profil de</string>
+    <string name="Signup">Inscription</string>
+    <string name="Days">Jour(s)</string>
+    <string name="Years">An(s)</string>
 </resources>

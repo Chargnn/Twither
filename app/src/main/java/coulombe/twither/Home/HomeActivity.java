@@ -30,14 +30,12 @@ import coulombe.twither.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private List<TwitMessage> twitMessages = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        getSupportActionBar().setTitle("Accueil");
+        getSupportActionBar().setTitle(R.string.Home);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
         FloatingActionButton sendMessage = findViewById(R.id.floatingActionButton);
@@ -49,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         /////////////////////////////// TEMPORARY
+        List<TwitMessage> twitMessages = new ArrayList<>();
         twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
         twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
         twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
@@ -59,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         ArrayAdapter<TwitMessage> adapter = new HomeListViewAdapter(this);
         adapter.addAll(twitMessages);
         twit_list_view.setAdapter(adapter);
-
         ///////////////////////////////
 
         twit_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        MenuItem back2Top = menu.add("Accueil");
+        MenuItem back2Top = menu.add(R.string.Home);
         back2Top.setIcon(R.drawable.ic_home);
         back2Top.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         back2Top.setShowAsAction(back2Top.SHOW_AS_ACTION_ALWAYS);
@@ -85,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem profile = menu.add("Profil");
+        MenuItem profile = menu.add(R.string.Profile);
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -94,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem about = menu.add("À propos");
+        MenuItem about = menu.add(R.string.About);
         about.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -112,11 +110,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        MenuItem quit = menu.add("Quitter");
+        MenuItem quit = menu.add(R.string.Quit);
         quit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 finishAffinity();
+                return true;
+            }
+        });
+
+        MenuItem disconnect = menu.add(R.string.Disconnect);
+        disconnect.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
                 return true;
             }
         });
