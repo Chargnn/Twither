@@ -10,4 +10,6 @@
     <string name="Signup">Inscription</string>
     <string name="Days">Jour(s)</string>
     <string name="Years">An(s)</string>
+    <string name="OpenDrawer">Ouvrir</string>
+    <string name="CloseDrawer">Fermer</string>
 </resources>

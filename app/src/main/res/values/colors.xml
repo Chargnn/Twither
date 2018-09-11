@@ -2,6 +2,7 @@
 <resources>
     <color name="hr">#eaeaea</color>
     <color name="colorPrimary">#3e8dfb</color>
+    <color name="colorPrimaryLittleDark">#3276d3</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorTextBox">#ddf2ff</color>
     <color name="colorAccent">#FF4081</color>

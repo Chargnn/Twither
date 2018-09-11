@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_1"
+            android:checked="true"
+            android:icon="@android:drawable/ic_menu_mylocation"
+            android:title="Accueil" />
+        <item
+            android:id="@+id/navigation_item_2"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Profil" />
+
+        <item
+            android:id="@+id/navigation_subheader"
+            android:title="Options">
+            <menu>
+                <item
+                    android:id="@+id/navigation_sub_item_1"
+                    android:icon="@android:drawable/ic_menu_revert"
+                    android:title="Deconnexion" />
+                <item
+                    android:id="@+id/navigation_sub_item_2"
+                    android:icon="@android:drawable/ic_menu_info_details"
+                    android:title="À propos" />
+            </menu>
+        </item>
+    </group>
+</menu>
