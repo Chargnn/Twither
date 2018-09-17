@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +37,7 @@ public class HomeListViewAdapter extends ArrayAdapter<TwitMessage> {
         author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "This is my Toast message!", Toast.LENGTH_LONG).show();
                 openProfileActivity();
             }
         });

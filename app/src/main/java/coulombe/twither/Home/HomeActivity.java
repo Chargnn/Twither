@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -56,6 +57,14 @@ public class HomeActivity extends AppCompatActivity {
 
         /////////////////////////////// TEMPORARY
         List<TwitMessage> twitMessages = new ArrayList<>();
+        twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
+        twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
+        twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
+        twitMessages.add(new TwitMessage("Jo la patate", "This CircularProgressView is a (surprisingly) circular progress bar Android View that is designed to imitate the ... If not available, Material Blue 500 (#2196F3), The color of the progress bar. ... Will reset the animation if the value changes."));
+        twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
+        twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
+        twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
+        twitMessages.add(new TwitMessage("Jo la patate", "This CircularProgressView is a (surprisingly) circular progress bar Android View that is designed to imitate the ... If not available, Material Blue 500 (#2196F3), The color of the progress bar. ... Will reset the animation if the value changes."));
         twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
         twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
         twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
