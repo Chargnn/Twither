@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,16 +15,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +29,17 @@ import coulombe.twither.Global.TwitMessage;
 import coulombe.twither.Home.TwitMessage.SeeMessageActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
+import coulombe.twither.Service.HttpService;
+import coulombe.twither.Service.IMockServiceMessage;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
     ActionBarDrawerToggle toggleDrawer;
+    ArrayAdapter<TwitMessage> adapter;
+    List<TwitMessage> twitMessages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,27 +57,28 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        /////////////////////////////// TEMPORARY
-        List<TwitMessage> twitMessages = new ArrayList<>();
-        twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
-        twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
-        twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
-        twitMessages.add(new TwitMessage("Jo la patate", "This CircularProgressView is a (surprisingly) circular progress bar Android View that is designed to imitate the ... If not available, Material Blue 500 (#2196F3), The color of the progress bar. ... Will reset the animation if the value changes."));
-        twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
-        twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
-        twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
-        twitMessages.add(new TwitMessage("Jo la patate", "This CircularProgressView is a (surprisingly) circular progress bar Android View that is designed to imitate the ... If not available, Material Blue 500 (#2196F3), The color of the progress bar. ... Will reset the animation if the value changes."));
-        twitMessages.add(new TwitMessage("quelqu'un", "I disagree. You missed the point of the question. Despite the fact that he uses the phrase \"Time in seconds\" in the rest of the post he makes it clear that he doesn't actually want a plain conversion, he wants remainders."));
-        twitMessages.add(new TwitMessage("un pseudo", "This is less efficient than the accepted answer (employing a method call, which even in JVM bytecode is a few instructions)"));
-        twitMessages.add(new TwitMessage("Google", "By the way, you should take care to leap seconds in your computation: the last minute of a year may have an additional leap second so it indeed lasts 61 seconds instead of expected 60 seconds. The ISO specification even plan for possibly 61 seconds. You can find detail in java.util.Date javadoc."));
-        twitMessages.add(new TwitMessage("Jo la patate", "This CircularProgressView is a (surprisingly) circular progress bar Android View that is designed to imitate the ... If not available, Material Blue 500 (#2196F3), The color of the progress bar. ... Will reset the animation if the value changes."));
+        
+        adapter = new HomeListViewAdapter(this);
+        IMockServiceMessage service = HttpService.getMock();
 
+        service.get().enqueue(new Callback<List<TwitMessage>>() {
+            @Override
+            public void onResponse(Call<List<TwitMessage>> call, Response<List<TwitMessage>> response) {
+                for(TwitMessage m : response.body()) {
+                    twitMessages.add(m);
+                }
+                adapter.clear();
+                adapter.addAll(twitMessages);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<TwitMessage>> call, Throwable t) {
+            }
+        });
 
         ListView twit_list_view = findViewById(R.id.home_list_view);
-        ArrayAdapter<TwitMessage> adapter = new HomeListViewAdapter(this);
-        adapter.addAll(twitMessages);
         twit_list_view.setAdapter(adapter);
-        ///////////////////////////////
 
         twit_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
