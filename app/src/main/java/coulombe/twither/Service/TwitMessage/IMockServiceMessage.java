@@ -1,4 +1,4 @@
-package coulombe.twither.Service;
+package coulombe.twither.Service.TwitMessage;
 
 import java.util.List;
 

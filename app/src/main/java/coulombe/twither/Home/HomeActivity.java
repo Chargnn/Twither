@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,7 @@ import coulombe.twither.Home.TwitMessage.SeeMessageActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
-import coulombe.twither.Service.IMockServiceMessage;
+import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,9 +56,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        
+
         adapter = new HomeListViewAdapter(this);
-        IMockServiceMessage service = HttpService.getMock();
+        IMockServiceMessage service = HttpService.getMockMessage();
 
         service.get().enqueue(new Callback<List<TwitMessage>>() {
             @Override

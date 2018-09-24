@@ -1,10 +1,9 @@
-package coulombe.twither.Service;
+package coulombe.twither.Service.TwitMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import coulombe.twither.Global.TwitMessage;
-import coulombe.twither.Global.TwitUser;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 

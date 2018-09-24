@@ -37,7 +37,6 @@ public class HomeListViewAdapter extends ArrayAdapter<TwitMessage> {
         author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "This is my Toast message!", Toast.LENGTH_LONG).show();
                 openProfileActivity();
             }
         });
