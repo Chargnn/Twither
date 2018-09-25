@@ -19,7 +19,4 @@ public interface IMockServiceUser {
 
     @POST("/update")
     Call<Boolean> update(@Body TwitUser user);
-
-    @POST("/delete")
-    Call<Boolean> delete(@Body TwitUser user);
 }

@@ -36,10 +36,4 @@ public class MockServiceUser implements IMockServiceUser {
     public Call<Boolean> update(TwitUser user) {
         return this.delegate.returningResponse(true).update(user);
     }
-
-    @Override
-    public Call<Boolean> delete(TwitUser user) {
-        return this.delegate.returningResponse(true).delete(user);
-    }
-
 }
