@@ -27,4 +27,9 @@ public class MockServiceMessage implements IMockServiceMessage {
         return delegate.returningResponse(messages).get();
     }
 
+    @Override
+    public Call<Boolean> send(TwitMessage message) {
+        return delegate.returningResponse(true).send(message);
+    }
+
 }

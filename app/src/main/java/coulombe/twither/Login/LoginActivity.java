@@ -17,6 +17,7 @@ import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.TwitUser.IMockServiceUser;
 import coulombe.twither.Signup.SignupActivity;
+import coulombe.twither.Singleton.Session;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,10 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(response.body().nickname.toString().equals(username.getText().toString()) || response.body().email.toString().equals(username.getText().toString()) && response.body().password.toString().equals(password.getText().toString()))
+                if(response.body().nickname.toString().equals(username.getText().toString()) || response.body().email.toString().equals(username.getText().toString()) && response.body().password.toString().equals(password.getText().toString())) {
+                    Session.setInstance(response.body());
                     startActivity(i);
-                else
+                } else {
                     loginFailure();
+                }
             }
 
             @Override

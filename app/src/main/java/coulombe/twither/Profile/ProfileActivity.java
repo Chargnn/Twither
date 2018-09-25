@@ -18,6 +18,7 @@ import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
 import coulombe.twither.Service.TwitUser.IMockServiceUser;
+import coulombe.twither.Singleton.Session;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        getSupportActionBar().setTitle(getString(R.string.ProfileOf) + " " + Session.getInstance().nickname);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
@@ -39,30 +41,18 @@ public class ProfileActivity extends AppCompatActivity {
         IMockServiceUser service = HttpService.getMockUser();
         IMockServiceMessage serviceMessage = HttpService.getMockMessage();
 
-        loadUserInfo(service);
+        loadUserInfo();
         loadMessages(serviceMessage);
 
         ListView twit_list_view = findViewById(R.id.list_view_profile);
         twit_list_view.setAdapter(adapter);
     }
 
-    private void loadUserInfo(IMockServiceUser service){
-        service.get().enqueue(new Callback<TwitUser>() {
-            @Override
-            public void onResponse(Call<TwitUser> call, Response<TwitUser> response) {
-                TextView username = findViewById(R.id.textView9);
-                TextView bio = findViewById(R.id.textView10);
-
-                username.setText(response.body().nickname);
-                bio.setText(response.body().bio);
-
-                getSupportActionBar().setTitle(getString(R.string.ProfileOf) + " " + response.body().nickname);
-            }
-
-            @Override
-            public void onFailure(Call<TwitUser> call, Throwable t) {
-            }
-        });
+    private void loadUserInfo(){
+        TextView username = findViewById(R.id.textView9);
+        TextView bio = findViewById(R.id.textView10);
+        username.setText(Session.getInstance().nickname);
+        bio.setText(Session.getInstance().bio);
     }
 
     private void loadMessages(IMockServiceMessage serviceMessage){

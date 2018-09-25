@@ -26,10 +26,12 @@ import java.util.List;
 
 import coulombe.twither.Global.TwitMessage;
 import coulombe.twither.Home.TwitMessage.SeeMessageActivity;
+import coulombe.twither.Login.LoginActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
+import coulombe.twither.Singleton.Session;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -110,6 +112,8 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.navigation_sub_item_1:{
+                        Session.setInstance(null);
+                        openLoginActivity();
                         break;
                     }
                     case R.id.navigation_sub_item_2:{
@@ -165,6 +169,11 @@ public class HomeActivity extends AppCompatActivity {
 
     private void openSeeMessageActivity(){
         Intent i = new Intent(this, SeeMessageActivity.class);
+        startActivity(i);
+    }
+
+    private void openLoginActivity(){
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 }
