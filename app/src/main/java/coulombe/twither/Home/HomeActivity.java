@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,10 +82,15 @@ public class HomeActivity extends AppCompatActivity {
 
         final NavigationView drawer = findViewById(R.id.drawer);
         final DrawerLayout drawer_layout = findViewById(R.id.drawer_layout);
+        final NavigationView nv = (NavigationView) findViewById(R.id.drawer);
+        View header = nv.getHeaderView(0);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toggleDrawer = new ActionBarDrawerToggle(this, drawer_layout, R.string.OpenDrawer, R.string.CloseDrawer);
         drawer_layout.addDrawerListener(toggleDrawer);
+        TextView drawerTitle = header.findViewById(R.id.textView10);
+        drawerTitle.setText(Session.getInstance().nickname);
         toggleDrawer.syncState();
 
         drawer.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

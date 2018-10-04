@@ -1,7 +1,10 @@
 package coulombe.twither.Home;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.preference.DialogPreference;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -44,6 +47,37 @@ public class HomeListViewAdapter extends ArrayAdapter<TwitMessage> {
         TextView message = v.findViewById(R.id.textView6);
         message.setText(twitMessageInfo.message);
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Action");
+
+                alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Modifier",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                openUpdateMessageActivity();
+                            }
+                        });
+
+                alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "Supprimer",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(), "Message supprimé", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_NEGATIVE, "Annuler",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+            }
+        });
+
+
         TextView date = v.findViewById(R.id.textView7);
         date.setText(formatDate(twitMessageInfo.date));
 
@@ -75,6 +109,11 @@ public class HomeListViewAdapter extends ArrayAdapter<TwitMessage> {
 
     private void openProfileActivity(){
         Intent i = new Intent(getContext(), ProfileActivity.class);
+        getContext().startActivity(i);
+    }
+
+    private void openUpdateMessageActivity(){
+        Intent i = new Intent(getContext(), UpdateMessage.class);
         getContext().startActivity(i);
     }
 }

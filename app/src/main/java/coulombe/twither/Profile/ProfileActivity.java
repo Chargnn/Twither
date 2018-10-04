@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import coulombe.twither.Global.TwitMessage;
-import coulombe.twither.Global.TwitUser;
 import coulombe.twither.Home.HomeListViewAdapter;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
