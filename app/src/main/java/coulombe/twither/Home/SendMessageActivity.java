@@ -7,20 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import coulombe.twither.Global.TwitConstants;
-import coulombe.twither.Global.TwitMessage;
 import coulombe.twither.R;
-import coulombe.twither.Service.HttpService;
-import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SendMessageActivity extends AppCompatActivity {
 
@@ -37,7 +29,7 @@ public class SendMessageActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
         Button send = findViewById(R.id.button3);
-        final IMockServiceMessage service = HttpService.getMockMessage();
+        /*final IMockServiceMessage service = HttpService.getMockMessage();
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +48,7 @@ public class SendMessageActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
         remainingCharacter = findViewById(R.id.textView);
         message = findViewById(R.id.editText7);

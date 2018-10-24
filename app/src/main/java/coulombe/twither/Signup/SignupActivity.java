@@ -3,21 +3,22 @@ package coulombe.twither.Signup;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import coulombe.twither.Global.TwitUser;
-import coulombe.twither.Login.LoginActivity;
+import org.coulombe.User;
+
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
-import coulombe.twither.Service.TwitUser.IMockServiceUser;
+import coulombe.twither.Service.session.SessionService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,9 +38,11 @@ public class SignupActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
-        final IMockServiceUser service = HttpService.getMockUser();
-        password = findViewById(R.id.editText5);
+
+
+        final SessionService service = HttpService.getSession();
         progressBar = findViewById(R.id.progressBar);
+        password = findViewById(R.id.editText5);
         Button signup = findViewById(R.id.button2);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,21 +51,15 @@ public class SignupActivity extends AppCompatActivity {
                 final EditText email = findViewById(R.id.editText4);
                 final EditText confirmation = findViewById(R.id.editText6);
 
-                service.create(new TwitUser()).enqueue(new Callback<Boolean>() {
+                service.register(new User(nickname.getText().toString(), password.getText().toString(), email.getText().toString(), "")).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if(nickname.getText().toString().equals("") || password.getText().toString().equals("") || email.getText().toString().equals("") || confirmation.getText().toString().equals("")) {
-                            loginFailure();
-                            return;
-                        }
-
-                        if(response.body())
-                            Toast.makeText(SignupActivity.this, "Compte inscrit!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, String.valueOf(response.body()), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-
+                        Log.i("moi", t.getMessage());
                     }
                 });
             }

@@ -3,27 +3,12 @@ package coulombe.twither.Home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.List;
-
-import coulombe.twither.Global.TwitConstants;
-import coulombe.twither.Global.TwitMessage;
-import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
-import coulombe.twither.Service.HttpService;
-import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class UpdateMessage extends AppCompatActivity {
 
@@ -40,7 +25,7 @@ public class UpdateMessage extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
         Button send = findViewById(R.id.button4);
-        final IMockServiceMessage service = HttpService.getMockMessage();
+        /*final IMockServiceMessage service = HttpService.getMockMessage();
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,9 +44,9 @@ public class UpdateMessage extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
-        service.get().enqueue(new Callback<List<TwitMessage>>() {
+        /*service.get().enqueue(new Callback<List<TwitMessage>>() {
             @Override
             public void onResponse(Call<List<TwitMessage>> call, Response<List<TwitMessage>> response) {
                 message.setText(response.body().get(0).message);
@@ -71,7 +56,7 @@ public class UpdateMessage extends AppCompatActivity {
             public void onFailure(Call<List<TwitMessage>> call, Throwable t) {
 
             }
-        });
+        });*/
     }
 
     private void openHomeActivity(){

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,33 +14,29 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.coulombe.Message;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import coulombe.twither.Global.TwitMessage;
 import coulombe.twither.Login.LoginActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
-import coulombe.twither.Service.HttpService;
-import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
 import coulombe.twither.Singleton.Session;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
     ActionBarDrawerToggle toggleDrawer;
-    ArrayAdapter<TwitMessage> adapter;
-    List<TwitMessage> twitMessages = new ArrayList<>();
+    ArrayAdapter<Message> adapter;
+    List<Message> twitMessages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         adapter = new HomeListViewAdapter(this);
-        IMockServiceMessage service = HttpService.getMockMessage();
+        /*IMockServiceMessage service = HttpService.getMockMessage();
 
         service.get().enqueue(new Callback<List<TwitMessage>>() {
             @Override
@@ -75,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<TwitMessage>> call, Throwable t) {
             }
-        });
+        });*/
 
         ListView twit_list_view = findViewById(R.id.home_list_view);
         twit_list_view.setAdapter(adapter);
@@ -110,13 +107,14 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     case R.id.navigation_sub_item_1:{
                         Session.setInstance(null);
+                        Toast.makeText(HomeActivity.this, "Vous êtes déconnecté", Toast.LENGTH_SHORT).show();
                         openLoginActivity();
                         break;
                     }
                     case R.id.navigation_sub_item_2:{
                         AlertDialog alertDialog = new AlertDialog.Builder(HomeActivity.this).create();
                         alertDialog.setTitle("À propos de Twither");
-                        alertDialog.setMessage(Html.fromHtml("<p>Fait par: <b>Alexis Coulombe</b></p>"));
+                        alertDialog.setMessage(Html.fromHtml("<p><b>Alexis Coulombe</b></p>"));
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {

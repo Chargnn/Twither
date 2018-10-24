@@ -1,56 +1,44 @@
 package coulombe.twither.Service;
 
-import java.util.concurrent.TimeUnit;
-
-import coulombe.twither.Service.TwitMessage.IMockServiceMessage;
-import coulombe.twither.Service.TwitMessage.MockServiceMessage;
-import coulombe.twither.Service.TwitUser.IMockServiceUser;
-import coulombe.twither.Service.TwitUser.MockServiceUser;
+import coulombe.twither.Service.message.MessageService;
+import coulombe.twither.Service.session.SessionService;
+import coulombe.twither.Service.user.UserService;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-import retrofit2.mock.BehaviorDelegate;
-import retrofit2.mock.MockRetrofit;
-import retrofit2.mock.NetworkBehavior;
 
 public class HttpService {
 
-    public static IMockServiceMessage getMockMessage(){
+    public static UserService getUser(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.google.ca/")
+                .baseUrl("http://10.0.2.2:8888/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
-        NetworkBehavior networkBehavior = NetworkBehavior.create();
-        networkBehavior.setDelay(1000, TimeUnit.MILLISECONDS);
-        networkBehavior.setVariancePercent(90);
-
-        MockRetrofit mock = new MockRetrofit.Builder(retrofit)
-                .networkBehavior(networkBehavior)
-                .build();
-
-        BehaviorDelegate<IMockServiceMessage> delegate = mock.create(IMockServiceMessage.class);
-
-
-        return new MockServiceMessage(delegate);
+        UserService service = retrofit.create(UserService.class);
+        return service;
     }
 
-    public static IMockServiceUser getMockUser(){
+    public static SessionService getSession(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.google.ca/")
+                .baseUrl("http://10.0.2.2:8888/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
-        NetworkBehavior networkBehavior = NetworkBehavior.create();
-        networkBehavior.setDelay(1000, TimeUnit.MILLISECONDS);
-        networkBehavior.setVariancePercent(90);
+        SessionService service = retrofit.create(SessionService.class);
+        return service;
+    }
 
-        MockRetrofit mock = new MockRetrofit.Builder(retrofit)
-                .networkBehavior(networkBehavior)
+    public static MessageService getMessage(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8888/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
-        BehaviorDelegate<IMockServiceUser> delegate = mock.create(IMockServiceUser.class);
-
-
-        return new MockServiceUser(delegate);
+        MessageService service = retrofit.create(MessageService.class);
+        return service;
     }
 }

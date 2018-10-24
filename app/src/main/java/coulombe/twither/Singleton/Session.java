@@ -1,20 +1,20 @@
 package coulombe.twither.Singleton;
 
-import coulombe.twither.Global.TwitUser;
+import org.coulombe.User;
 
 public class Session {
 
-    private static TwitUser user;
+    private static User user;
 
     private Session(){
 
     }
 
-    public static TwitUser getInstance(){
+    public static User getInstance(){
         return user;
     }
 
-    public static void setInstance(TwitUser u){
+    public static void setInstance(User u){
         user = u;
     }
 
