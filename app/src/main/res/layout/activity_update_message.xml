@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="358dp"
         android:background="@drawable/rounded_button"
-        android:text="Button"
+        android:text="Modifier"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

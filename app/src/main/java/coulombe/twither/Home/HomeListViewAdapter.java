@@ -91,7 +91,7 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
                     alertDialog.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Modifier",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    openUpdateMessageActivity();
+                                    openUpdateMessageActivity(twitMessageInfo);
                                 }
                             });
 
@@ -138,7 +138,7 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
     private String formatDate(Date date){
         Date today = new Date();
 
-        long diff = date.getTime() - today.getTime();
+        long diff = Math.abs(date.getTime() - today.getTime());
 
         long years = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) % 365;
         long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
@@ -163,8 +163,10 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
         getContext().startActivity(i);
     }
 
-    private void openUpdateMessageActivity(){
+    private void openUpdateMessageActivity(Message message){
         Intent i = new Intent(getContext(), UpdateMessage.class);
+        i.putExtra("id", message.author_id + "");
+        i.putExtra("messageid", message.id + "");
         getContext().startActivity(i);
     }
 }
