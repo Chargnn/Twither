@@ -51,7 +51,7 @@ public class SignupActivity extends AppCompatActivity {
                 final EditText email = findViewById(R.id.editText4);
                 final EditText confirmation = findViewById(R.id.editText6);
 
-                service.register(new User(nickname.getText().toString(), password.getText().toString(), email.getText().toString(), "")).enqueue(new Callback<Boolean>() {
+                service.register(new User(0, nickname.getText().toString(), password.getText().toString(), email.getText().toString(), "")).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         Toast.makeText(SignupActivity.this, String.valueOf(response.body()), Toast.LENGTH_SHORT).show();
@@ -59,7 +59,7 @@ public class SignupActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Log.i("moi", t.getMessage());
+
                     }
                 });
             }

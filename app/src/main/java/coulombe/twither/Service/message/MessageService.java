@@ -2,6 +2,8 @@ package coulombe.twither.Service.message;
 
 import org.coulombe.Message;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -16,10 +18,16 @@ public interface MessageService {
     @POST("message/update/{id}/{messageid}")
     Call<Boolean> update(@Path("id") int id, @Path("messageid") int messageid, @Body Message message);
 
+    @GET("message/remove/{id}/{messageid}")
+    Call<Boolean> remove(@Path("id") int id, @Path("messageid") int messageid);
+
     @GET("message/get/{id}/{messageid}")
-    Call<String> get(@Path("id") int id, @Path("messageid") int messageid);
+    Call<Message> get(@Path("id") int id, @Path("messageid") int messageid);
 
     @GET("message/getall/{id}")
     Call<String> getAll(@Path("id") int id);
+
+    @GET("message/getall")
+    Call<List<Message>> getAll();
 
 }

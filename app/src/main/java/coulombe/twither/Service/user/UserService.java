@@ -17,7 +17,7 @@ public interface UserService {
     Call<String> update(@Path("id") int id);
 
     @GET("user/get/{id}")
-    Call<String> get(@Path("id") int id);
+    Call<User> get(@Path("id") int id);
 
     @GET("user/get2/{nickname}")
     Call<User> getByNicknameOrEmail(@Path("nickname") String nickname);

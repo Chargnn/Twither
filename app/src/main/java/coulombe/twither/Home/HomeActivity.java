@@ -30,7 +30,12 @@ import java.util.List;
 import coulombe.twither.Login.LoginActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
+import coulombe.twither.Service.HttpService;
+import coulombe.twither.Service.message.MessageService;
 import coulombe.twither.Singleton.Session;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -56,12 +61,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
         adapter = new HomeListViewAdapter(this);
-        /*IMockServiceMessage service = HttpService.getMockMessage();
-
-        service.get().enqueue(new Callback<List<TwitMessage>>() {
+        MessageService service = HttpService.getMessage();
+        service.getAll().enqueue(new Callback<List<Message>>() {
             @Override
-            public void onResponse(Call<List<TwitMessage>> call, Response<List<TwitMessage>> response) {
-                for(TwitMessage m : response.body()) {
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                for(Message m : response.body()) {
                     twitMessages.add(m);
                 }
                 adapter.clear();
@@ -70,9 +74,10 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<TwitMessage>> call, Throwable t) {
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+
             }
-        });*/
+        });
 
         ListView twit_list_view = findViewById(R.id.home_list_view);
         twit_list_view.setAdapter(adapter);

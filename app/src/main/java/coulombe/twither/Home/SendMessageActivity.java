@@ -7,12 +7,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.coulombe.Message;
 
 import coulombe.twither.Global.TwitConstants;
 import coulombe.twither.R;
+import coulombe.twither.Service.HttpService;
+import coulombe.twither.Service.message.MessageService;
+import coulombe.twither.Singleton.Session;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SendMessageActivity extends AppCompatActivity {
 
@@ -29,11 +39,12 @@ public class SendMessageActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
         Button send = findViewById(R.id.button3);
-        /*final IMockServiceMessage service = HttpService.getMockMessage();
+        message = findViewById(R.id.editText7);
+        final MessageService service = HttpService.getMessage();
         send.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                service.send(new TwitMessage("", "")).enqueue(new Callback<Boolean>() {
+            public void onClick(View v) {
+                service.create(Session.getInstance().id, new Message(0, Session.getInstance().id, message.getText().toString())).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if(response.body()) {
@@ -48,10 +59,9 @@ public class SendMessageActivity extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
 
         remainingCharacter = findViewById(R.id.textView);
-        message = findViewById(R.id.editText7);
         message.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
