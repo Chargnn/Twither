@@ -1,5 +1,6 @@
 package coulombe.twither.Signup;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,10 @@ import android.widget.Toast;
 
 import org.coulombe.User;
 
+import java.io.IOException;
+
+import coulombe.twither.Global.ErrorParser;
+import coulombe.twither.Login.LoginActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.session.SessionService;
@@ -49,17 +54,27 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final EditText nickname = findViewById(R.id.editText3);
                 final EditText email = findViewById(R.id.editText4);
-                final EditText confirmation = findViewById(R.id.editText6);
 
                 service.register(new User(0, nickname.getText().toString(), password.getText().toString(), email.getText().toString(), "")).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        Toast.makeText(SignupActivity.this, String.valueOf(response.body()), Toast.LENGTH_SHORT).show();
+                        if(response.body() == null) {
+                            try {
+                                Toast.makeText(SignupActivity.this, ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                return;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(response.body()) {
+                            Toast.makeText(SignupActivity.this, "Votre compte à bien été créé!", Toast.LENGTH_SHORT).show();
+                            openLoginActivity();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-
+                        Toast.makeText(getApplicationContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -140,7 +155,8 @@ public class SignupActivity extends AppCompatActivity {
         progressBar.setProgressDrawable(progressDrawable);
     }
 
-    private void loginFailure(){
-        Toast.makeText(SignupActivity.this, "Remplissez chaque champs", Toast.LENGTH_SHORT).show();
+    private void openLoginActivity(){
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
     }
 }

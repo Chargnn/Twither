@@ -24,14 +24,17 @@ import android.widget.Toast;
 
 import org.coulombe.Message;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import coulombe.twither.Global.ErrorParser;
 import coulombe.twither.Login.LoginActivity;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.message.MessageService;
+import coulombe.twither.Signup.SignupActivity;
 import coulombe.twither.Singleton.Session;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +68,15 @@ public class HomeActivity extends AppCompatActivity {
         service.getAll().enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
+                if(response.body() == null) {
+                    try {
+                        Toast.makeText(getApplicationContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        return;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 for(Message m : response.body()) {
                     twitMessages.add(m);
                 }
@@ -75,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-
+                Toast.makeText(HomeActivity.this, "Can't reach server", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import org.coulombe.Message;
 
+import java.io.IOException;
+
+import coulombe.twither.Global.ErrorParser;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
 import coulombe.twither.Service.message.MessageService;
@@ -34,7 +37,6 @@ public class UpdateMessage extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3e8dfb")));
 
-        Log.i("sa",getIntent().getStringExtra("id"));
         final int authorid = Integer.parseInt(getIntent().getStringExtra("id"));
         final int messageid = Integer.parseInt(getIntent().getStringExtra("messageid"));
 
@@ -43,12 +45,21 @@ public class UpdateMessage extends AppCompatActivity {
         service.get(authorid, messageid).enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
+                if(response.body() == null) {
+                    try {
+                        Toast.makeText(getApplicationContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        return;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 message.setText(response.body().message);
             }
 
             @Override
             public void onFailure(Call<Message> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,7 +78,7 @@ public class UpdateMessage extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-
+                        Toast.makeText(getApplicationContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

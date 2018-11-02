@@ -15,6 +15,9 @@ import android.widget.Toast;
 import org.coulombe.User;
 import org.coulombe.UserLogin;
 
+import java.io.IOException;
+
+import coulombe.twither.Global.ErrorParser;
 import coulombe.twither.Home.HomeActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
@@ -70,6 +73,15 @@ public class LoginActivity extends AppCompatActivity {
         service.login(new UserLogin(username.getText().toString(), username.getText().toString(), password.getText().toString())).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.body() == null) {
+                    try {
+                        Toast.makeText(getApplicationContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                        return;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 if(username == null || username.getText().equals("")) {
                     loginFailure();
                     return;
@@ -85,6 +97,15 @@ public class LoginActivity extends AppCompatActivity {
                     userService.getByNicknameOrEmail(username.getText().toString()).enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
+                            if(response.body() == null) {
+                                try {
+                                    Toast.makeText(getApplicationContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                    return;
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
                             User user = response.body();
                             Session.setInstance(user);
                             startActivity(i);
@@ -93,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -109,6 +130,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginFailure(){
-        Toast.makeText(LoginActivity.this, "Mauvais compte (temporaire)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, "Les données entrées ne sont pas valide!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

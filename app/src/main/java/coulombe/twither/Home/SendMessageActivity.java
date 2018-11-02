@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import org.coulombe.Message;
 
+import java.io.IOException;
+
+import coulombe.twither.Global.ErrorParser;
 import coulombe.twither.Global.TwitConstants;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
@@ -47,6 +50,15 @@ public class SendMessageActivity extends AppCompatActivity {
                 service.create(Session.getInstance().id, new Message(0, Session.getInstance().id, message.getText().toString())).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(response.body() == null) {
+                            try {
+                                Toast.makeText(getApplicationContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                return;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                         if(response.body()) {
                             Toast.makeText(SendMessageActivity.this, "Message envoyé!", Toast.LENGTH_SHORT).show();
                             openHomeActivity();
@@ -55,7 +67,7 @@ public class SendMessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-
+                       Toast.makeText(getApplicationContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

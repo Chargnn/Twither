@@ -25,7 +25,7 @@ public interface MessageService {
     Call<Message> get(@Path("id") int id, @Path("messageid") int messageid);
 
     @GET("message/getall/{id}")
-    Call<String> getAll(@Path("id") int id);
+    Call<List<Message>> getAll(@Path("id") int id);
 
     @GET("message/getall")
     Call<List<Message>> getAll();

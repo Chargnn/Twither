@@ -16,9 +16,11 @@ import android.widget.Toast;
 import org.coulombe.Message;
 import org.coulombe.User;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import coulombe.twither.Global.ErrorParser;
 import coulombe.twither.Profile.ProfileActivity;
 import coulombe.twither.R;
 import coulombe.twither.Service.HttpService;
@@ -74,7 +76,7 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
         author.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openProfileActivity();
+                openProfileActivity(twitMessageInfo);
             }
         });
 
@@ -101,6 +103,15 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
                                     service.remove(twitMessageInfo.author_id, twitMessageInfo.id).enqueue(new Callback<Boolean>() {
                                         @Override
                                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                                            if(response.body() == null) {
+                                                try {
+                                                    Toast.makeText(getContext(), ErrorParser.parse(response.errorBody().string()), Toast.LENGTH_SHORT).show();
+                                                    return;
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
                                             if (!response.body())
                                                 Toast.makeText(getContext(), "Impossible de retirer ce message", Toast.LENGTH_SHORT).show();
 
@@ -111,7 +122,7 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
 
                                         @Override
                                         public void onFailure(Call<Boolean> call, Throwable t) {
-
+                                            Toast.makeText(getContext(), "Can't reach server", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }
@@ -158,8 +169,9 @@ public class HomeListViewAdapter extends ArrayAdapter<Message> {
             return years + " " + getContext().getString(R.string.Years);
     }
 
-    private void openProfileActivity(){
+    private void openProfileActivity(Message message){
         Intent i = new Intent(getContext(), ProfileActivity.class);
+        i.putExtra("id", message.author_id + "");
         getContext().startActivity(i);
     }
 
